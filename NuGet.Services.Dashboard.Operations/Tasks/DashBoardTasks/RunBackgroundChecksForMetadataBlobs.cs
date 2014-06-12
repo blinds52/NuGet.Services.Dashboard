@@ -48,7 +48,7 @@ namespace NuGetGallery.Operations.Tasks.DashBoardTasks
 
             DateTime catalogTimestamp = catalogIndex["timeStamp"].ToObject<DateTime>();
 
-            TimeSpan span = cursorTimestamp - catalogTimestamp;
+            TimeSpan span = catalogTimestamp - cursorTimestamp;
 
             double delta = span.TotalMinutes;
 
