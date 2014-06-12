@@ -26,8 +26,6 @@ namespace NuGet.Services.Dashboard.Common
         public int FailoverDBAndBlobLag = 20; //Specifies the allowed lag between failover DB and blob in terms of number of packages.
         public int SearchCpuThreshold = 80; //specifies the limit on search service cpu usage (% used in maxsize)
         public int SearchMemThreshold = 1; // specifies the limit on search service memory usage (GB)
-
-
-
+        public int CatalogToResolverBlobLagThresholdInMinutes = 5; // The number of minutes that it's acceptable for the resolver blobs to lag the package catalog.
     }
 }

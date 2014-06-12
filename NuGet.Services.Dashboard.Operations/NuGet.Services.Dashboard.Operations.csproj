@@ -159,6 +159,7 @@
     <Compile Include="Tasks\DashBoardTasks\CreateWADPerformanceDiagnosticsReportTask.cs" />
     <Compile Include="Tasks\DashBoardTasks\CreateWorkJobDetailReportTask.cs" />
     <Compile Include="Tasks\DashBoardTasks\RunBackgroundCheckForFailoverDC.cs" />
+    <Compile Include="Tasks\DashBoardTasks\RunBackgroundChecksForMetadataBlobs.cs" />
     <Compile Include="Tasks\DashBoardTasks\RunBackGroundChecksForWorkerJobs.cs" />
     <Compile Include="Tasks\DashBoardTasks\SendAlertMailTask.cs" />
     <Compile Include="Tasks\DashBoardTasks\SendLoadTestReportEmailTask.cs" />
