@@ -66,7 +66,7 @@ namespace NuGetGallery.Operations
                     sqlConnection.Open();
                     int sizeInMb = dbExecutor.Query<int>(SqlQueryForDbSize).SingleOrDefault();
                     Int64 maxSizeInMb = dbExecutor.Query<Int64>(SqlQueryForMaxSize).SingleOrDefault();
-                    double percentUsed = (sizeInMb/maxSizeInMb)*100;                    
+                    var percentUsed = ((float)sizeInMb/maxSizeInMb)*100;                    
                     string edition = dbExecutor.Query<string>(SqlQueryForEdition).SingleOrDefault();
                     string dbName = Util.GetDbName(connectionString);
 
@@ -75,7 +75,7 @@ namespace NuGetGallery.Operations
                         new SendAlertMailTask
                         {
                             AlertSubject = string.Format("SQL Azure database size alert activated for {0}",dbName),
-                            Details = string.Format("DB Size excced the threshold percent.Current Used % {0}, Threshold % : {1}", percentUsed, threshold ),
+                            Details = string.Format("DB Size excced the threshold percent.Current Used % : {0}, Threshold % : {1}, Current Size in MB : {2}, Max Allowed in MB: {3}", percentUsed, threshold,sizeInMb,maxSizeInMb ),
                             AlertName = "SQL Azure DB alert for database size limit",
                             Component = string.Format("SQL Azure database-{0}",dbName)
                         }.ExecuteCommand();
