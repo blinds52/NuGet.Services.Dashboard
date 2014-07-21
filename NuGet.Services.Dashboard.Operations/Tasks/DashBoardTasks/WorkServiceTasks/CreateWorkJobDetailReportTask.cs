@@ -37,9 +37,12 @@ namespace NuGetGallery.Operations.Tasks.DashBoardTasks
         [Option("CertificateName", AltName = "cername")]
         public string CertificateName { get; set; }
 
+        [Option("lastNhour", AltName = "n")]
+        public int lastNhour { get; set; }
+
         public override void ExecuteCommand()
         {
-            int lastNhour = 24;
+            //int lastNhour = 24;
             List<WorkInstanceDetail> jobDetail = new List<WorkInstanceDetail>();
             List<WorkJobInstanceDetails> instanceDetails = getWorkjobInstance();
            
@@ -152,7 +155,7 @@ namespace NuGetGallery.Operations.Tasks.DashBoardTasks
              
              var json = new JavaScriptSerializer().Serialize(jobDetail);
              var key = new JavaScriptSerializer().Serialize(allkey);
-             ReportHelpers.CreateBlob(StorageAccount, "WorkJobDetail.json", ContainerName, "application/json", ReportHelpers.ToStream(json));
+             ReportHelpers.CreateBlob(StorageAccount, lastNhour+"WorkJobDetail.json", ContainerName, "application/json", ReportHelpers.ToStream(json));
              ReportHelpers.CreateBlob(StorageAccount, "WorkServiceAdminKey.json", ContainerName, "application/json", ReportHelpers.ToStream(key));
         }
 
