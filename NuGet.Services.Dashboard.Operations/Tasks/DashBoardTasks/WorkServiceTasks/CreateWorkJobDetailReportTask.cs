@@ -143,6 +143,18 @@ namespace NuGetGallery.Operations.Tasks.DashBoardTasks
                         }.ExecuteCommand();
                     }
 
+                    if (invocationCount < ((lastNhour*60 / job.FrequencyInMinutes) /2))
+                    {
+                        new SendAlertMailTask
+                        {
+                            AlertSubject = string.Format("Error: Alert for work job service : {0} failure", job.JobInstanceName),
+                            Details = string.Format("In last 24 hours, invocation of {0} is only {1}, it's less than half of scheduled jobs",job.JobInstanceName, invocationCount),
+                            AlertName = string.Format("Error: Work job service {0}", job.JobInstanceName),
+                            Component = "work job service",
+                            Level = "Error"
+                        }.ExecuteCommand();
+                    }
+
                 }
             }
 
