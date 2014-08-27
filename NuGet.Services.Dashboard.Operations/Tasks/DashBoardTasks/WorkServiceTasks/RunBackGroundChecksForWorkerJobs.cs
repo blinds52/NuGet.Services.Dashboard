@@ -296,8 +296,8 @@ namespace NuGetGallery.Operations.Tasks.DashBoardTasks
                     AlertSubject = "Error: Work service job background check alert activated for Package Statistics job",
                     Details = outputMessage,
                     AlertName = "Error: Alert for Package Statistics",
-                    Component = "BackupPackages Job",
-                    Level = "Warning"
+                    Component = "Package statistics Job",
+                    Level = "Error"
                 }.ExecuteCommand();
             }
             return outputMessage;

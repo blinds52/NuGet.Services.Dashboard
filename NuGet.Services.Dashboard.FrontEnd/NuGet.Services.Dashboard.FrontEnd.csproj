@@ -202,6 +202,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AlertMailController.cs" />
     <Compile Include="Controllers\DatabaseController.cs" />
     <Compile Include="Controllers\ThresholdController.cs" />
     <Compile Include="Controllers\TroubleShootingController.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AlertMailViewModel.cs" />
     <Compile Include="Models\PingdomMonthlyReportViewModel.cs" />
     <Compile Include="Models\PingdomPerCountryViewModel.cs" />
     <Compile Include="Models\PingdomStatusViewModel.cs" />
@@ -416,6 +418,8 @@
     <Content Include="Views\Threshold\Edit.cshtml" />
     <Content Include="Views\Threshold\Create.cshtml" />
     <Content Include="Views\V2GalleryFrontEnd\V2GalleryFrontEnd_LatencyDetails.cshtml" />
+    <Content Include="Views\AlertMail\AlertMail_Details.cshtml" />
+    <Content Include="Views\AlertMail\Record_Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

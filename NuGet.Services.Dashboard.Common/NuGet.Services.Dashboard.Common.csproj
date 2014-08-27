@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlertEntry.cs" />
     <Compile Include="AlertThresholds.cs" />
     <Compile Include="SearchResult.cs" />
     <Compile Include="VsTrending.cs" />

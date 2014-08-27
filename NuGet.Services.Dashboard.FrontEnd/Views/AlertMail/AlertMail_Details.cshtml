@@ -1,0 +1,53 @@
+﻿@using NuGetDashboard.Models;
+@model IEnumerable<AlertMailViewModel>
+
+<div class="page secondary with-sidebar">
+    <div class="page-header">
+        <div class="page-header-content" id="headercontent">
+            <h1 id="title">AlertMail<small>Detail</small></h1>
+            <a href="/" id="backbutton" class=" back-button big page-back"></a>
+        </div>
+    </div>
+</div>
+
+<div style="width:800px;" class="fg-color-darken" id="AlertMail">
+<table class="hovered">
+    <tbody>
+        <tr>
+            <th>
+                Alert Subject
+            </th>
+            <th>
+                Count
+            </th>
+            <th>
+                Component
+            </th>
+            <th>
+                Last Alerting Time
+            </th>
+        </tr>
+        @foreach (AlertMailViewModel item in Model)
+            {
+            <tr>
+                <td>
+                    @item.AlertSubject
+                </td>
+                <td>
+                    @item.count
+                </td>
+                <td>
+                    @item.Component
+                </td>
+                <td>
+                    @item.lastTime.ToString()
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Record_Details",  new { name = item.details_ID })
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+    </div>

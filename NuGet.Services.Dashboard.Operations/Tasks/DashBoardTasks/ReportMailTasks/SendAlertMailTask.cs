@@ -18,6 +18,7 @@ using System.Web.Helpers;
 using System.Web.UI;
 using System.Net.Mime;
 using System.Configuration;
+using NuGet.Services.Dashboard.Common;
 
 namespace NuGetGallery.Operations
 {
@@ -42,6 +43,7 @@ namespace NuGetGallery.Operations
 
         public override void ExecuteCommand()
         {
+            loggingMail();
             //Either create an incident or send mail based on the current settings.
             if (ConfigurationManager.AppSettings["UsePagerDuty"].Equals("true", StringComparison.OrdinalIgnoreCase))
             {
@@ -54,6 +56,29 @@ namespace NuGetGallery.Operations
                     SendEmail();
                 }
             }          
+        }
+
+        private void loggingMail()
+        {
+            List<AlertEntry> alertlist = new List<AlertEntry>();
+            string blobName = string.Format("{0:yyyy-MM}/{1}@{2}", DateTime.Now, AlertSubject.Replace(" ", "_"),Component.Replace(" ","_"));
+            string _connectionString = ConfigurationManager.AppSettings["AlertStorageConnection"];
+            string containerName = ConfigurationManager.AppSettings["AlertContainer"];
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(_connectionString);
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+            CloudBlockBlob blob = container.GetBlockBlobReference(blobName);
+
+            if (blob.Exists())
+            {
+                string json = ReportHelpers.Load(storageAccount, blobName, containerName);
+                alertlist = new JavaScriptSerializer().Deserialize<List<AlertEntry>>(json);
+            }
+
+            alertlist.Add(new AlertEntry { time = DateTime.Now, message = Details });
+
+            var key = new JavaScriptSerializer().Serialize(alertlist);
+            ReportHelpers.CreateBlob(storageAccount, blobName, containerName, "application/json", ReportHelpers.ToStream(key));
         }
 
         private void CreateIncident()
