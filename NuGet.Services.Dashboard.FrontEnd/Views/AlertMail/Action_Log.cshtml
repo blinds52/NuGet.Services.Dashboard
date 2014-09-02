@@ -1,0 +1,36 @@
+﻿@using NuGet.Services.Dashboard.Common;
+@model List<AlertEntry>
+<div class="page secondary with-sidebar">
+    <div class="page-header">
+        <div class="page-header-content" id="headercontent">
+            <h1 id="title">Action<small>Log</small></h1>
+            <a href="/" id="backbutton" class=" back-button big page-back"></a>
+        </div>
+    </div>
+</div>
+
+<div style="width:800px;" class="fg-color-darken" id="threshold">
+    <table class="hovered">
+        <tbody>
+            <tr>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+            @foreach (AlertEntry item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.time
+                    </td>
+                    <td>
+                        @item.message
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

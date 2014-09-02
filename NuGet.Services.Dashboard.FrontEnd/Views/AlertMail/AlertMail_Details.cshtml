@@ -9,7 +9,8 @@
         </div>
     </div>
 </div>
-
+@if (Model.Count() > 0)
+{
 <div style="width:800px;" class="fg-color-darken" id="AlertMail">
 <table class="hovered">
     <tbody>
@@ -26,9 +27,12 @@
             <th>
                 Last Alerting Time
             </th>
+            <th>
+                Last Action
+            </th>
         </tr>
         @foreach (AlertMailViewModel item in Model)
-            {
+        {
             <tr>
                 <td>
                     @item.AlertSubject
@@ -43,11 +47,21 @@
                     @item.lastTime.ToString()
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Record_Details",  new { name = item.details_ID })
+                    @item.lastAction
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Record_Details", new { name = item.details_ID })
                     
+                </td>
+                <td>
+                    @Html.ActionLink("Action", "Action_Details", new { name = string.Format("{0}@{1}", item.AlertSubject, item.Component)})
+                </td>
+                <td>
+                    @Html.ActionLink("ActionLog", "Action_Log", new { name = string.Format("{0}@{1}", item.AlertSubject, item.Component) })
                 </td>
             </tr>
         }
     </tbody>
 </table>
     </div>
+}

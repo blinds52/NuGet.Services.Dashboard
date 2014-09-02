@@ -62,12 +62,21 @@ namespace NuGetGallery.Operations
         {
             List<AlertEntry> alertlist = new List<AlertEntry>();
             string blobName = string.Format("{0:yyyy-MM}/{1}@{2}", DateTime.Now, AlertSubject.Replace(" ", "_"),Component.Replace(" ","_"));
+            string blobName_action = string.Format("{0:yyyy-MM}_action/{1}@{2}_action", DateTime.Now, AlertSubject.Replace(" ", "_"), Component.Replace(" ", "_"));
             string _connectionString = ConfigurationManager.AppSettings["AlertStorageConnection"];
             string containerName = ConfigurationManager.AppSettings["AlertContainer"];
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(_connectionString);
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
             CloudBlobContainer container = blobClient.GetContainerReference(containerName);
             CloudBlockBlob blob = container.GetBlockBlobReference(blobName);
+            CloudBlockBlob action_blob = container.GetBlockBlobReference(blobName_action);
+
+            if (!action_blob.Exists())
+            {
+                List<AlertEntry> actionlist = new List<AlertEntry>();
+                var content = new JavaScriptSerializer().Serialize(actionlist);
+                ReportHelpers.CreateBlob(storageAccount, blobName_action, containerName, "application/json", ReportHelpers.ToStream(content));
+            }
 
             if (blob.Exists())
             {

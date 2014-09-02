@@ -1,0 +1,28 @@
+﻿@using NuGetDashboard.Models;
+@model ActionViewModel
+<div class="page secondary with-sidebar">
+    <div class="page-header">
+        <div class="page-header-content" id="headercontent">
+            <h1 id="title">Action<small>Edit</small></h1>
+            <a href="/" id="backbutton" class=" back-button big page-back"></a>
+        </div>
+    </div>
+</div>
+
+<div style="width:800px;" class="fg-color-darken" id="action">
+    <form action="/AlertMail/Action_Details" method="post">
+        <table class="hovered">
+            <tbody>
+                <tr>
+                    <td>Alert Name</td>
+                    <td><input type="text" name="AlertSubject" value="@Model.AlertSubject"></td>
+                </tr>
+                <tr>
+                    <td>Action</td>
+                    <td><input type="text" name="Action" value="@Model.Action"></td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="Save" />
+    </form>    
+</div>

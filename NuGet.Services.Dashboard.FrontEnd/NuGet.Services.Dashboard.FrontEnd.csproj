@@ -420,6 +420,8 @@
     <Content Include="Views\V2GalleryFrontEnd\V2GalleryFrontEnd_LatencyDetails.cshtml" />
     <Content Include="Views\AlertMail\AlertMail_Details.cshtml" />
     <Content Include="Views\AlertMail\Record_Details.cshtml" />
+    <Content Include="Views\AlertMail\Action_Details.cshtml" />
+    <Content Include="Views\AlertMail\Action_Log.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

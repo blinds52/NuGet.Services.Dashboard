@@ -17,5 +17,13 @@ namespace NuGetDashboard.Models
 
         public string details_ID { get; set; }
 
+        public string lastAction { get; set; }
+
+    }
+
+    public class ActionViewModel
+    {
+        public string AlertSubject { get; set; }
+        public string Action { get; set; }
     }
 }
