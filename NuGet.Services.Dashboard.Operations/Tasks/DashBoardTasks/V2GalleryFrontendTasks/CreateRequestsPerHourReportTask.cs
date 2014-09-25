@@ -97,6 +97,18 @@ namespace NuGetGallery.Operations
                 {
                     avgTime = GetDataForUriStem(stem.UriStem, "avg (time-taken)", info.FullName);
                 }
+                //search alert
+                if (stem.ScenarioName.Equals("Search",StringComparison.OrdinalIgnoreCase) && requestCount > 75000)
+                {
+                    new SendAlertMailTask
+                    {
+                        AlertSubject = string.Format("Warning: Alert for Search service"),
+                        Details = string.Format("Search query number is more than 75K"),
+                        AlertName = string.Format("Warning: Search service"),
+                        Component = "Search service",
+                        Level = "Warning"
+                    }.ExecuteCommand();
+                }
                 requestDetails.Add(new IISRequestDetails(stem.ScenarioName, stem.UriStem, avgTime, requestCount));
             }
             var json = new JavaScriptSerializer().Serialize(requestDetails);
