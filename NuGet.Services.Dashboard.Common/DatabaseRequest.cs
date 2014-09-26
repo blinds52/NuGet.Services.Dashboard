@@ -14,5 +14,7 @@ namespace NuGet.Services.Dashboard.Common
         public string Command;
         public string Wait_Type;
         public int wait_time;
+        public Int16 session_id;
+        public int request_id;
     }
 }

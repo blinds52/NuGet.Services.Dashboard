@@ -7,6 +7,12 @@
     <tbody>
         <tr>
             <th>
+                Session_id
+            </th>
+            <th>
+                Request_id
+            </th>
+            <th>
                 Sql
             </th>
             <th>
@@ -29,6 +35,12 @@
         @foreach (DatabaseRequest dbEvent in @Model)
         {
             <tr>
+                <td>
+                    @dbEvent.session_id
+                </td>
+                <td>
+                    @dbEvent.request_id
+                </td>
                 <td>
                     @dbEvent.text
                 </td>
